@@ -98,6 +98,12 @@ public class Manter implements Parcelable {
         return;
     }
 
+    public void somarOnStopContador() {
+        contador -= 550;
+        concatenar();
+        return;
+    }
+
     private void concatenar()
     {
         texto += texto.concat("Quem(" + quem  + "), Contador[" + contador + "], ");

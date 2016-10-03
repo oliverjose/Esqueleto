@@ -32,32 +32,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    /*
     @Override
     protected void onResume() {
         super.onResume();
 
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
+        manter.somarOnResumeContador();
+        // manter =  getIntent().getExtras().getParcelable("_manter");
+        editTextTela1.setText( manter.getTexto() );
+    }
 
-        texto = "onResume";
-        editTextTela1.setText(texto.concat("(" + m.getAddOnResumeContador()) + "),");    }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
-
-        texto = "onPause";
-        editTextTela1.setText(texto.concat("(" + m.getSubOnPauseContador()) + "),");
+        manter.subtrairOnPauseContador();
+        // manter =  getIntent().getExtras().getParcelable("_manter");
+        editTextTela1.setText( manter.getTexto() );
 
     }
 
-   */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        manter.somarOnStopContador();
+        // manter =  getIntent().getExtras().getParcelable("_manter");
+        editTextTela1.setText( manter.getTexto() );
+    }
 
     public void tela2_OnClick(View view){
 
+        // Intent it = new Intent(MainActivity.this, Tela2Activity.class);
         Intent it = new Intent(this, Tela2Activity.class);
         it.putExtra("_manter", manter);
         startActivity(it);

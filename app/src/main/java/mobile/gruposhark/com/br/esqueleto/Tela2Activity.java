@@ -14,8 +14,7 @@ public class Tela2Activity extends AppCompatActivity {
     private Button buttonTela2Encerrar;
     private Button buttonVoltarTela2;
 
-    private String texto;
-    private int contador;
+    Manter manter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,51 +25,27 @@ public class Tela2Activity extends AppCompatActivity {
         buttonTela2Encerrar = (Button)findViewById(R.id.buttonTela2Encerrar);
         buttonVoltarTela2 = (Button)findViewById(R.id.buttonVoltarTela2);
 
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
+        manter =  getIntent().getExtras().getParcelable("_manter");
+        manter.setQuem("Tela2");
 
-        texto = m.getTexto();
-        contador = m.getContador();
 
-        editTextTela2.setText(texto.concat("(" + String.valueOf(contador)) + ")");
-
+        editTextTela2.setText(manter.getTexto());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
+        manter.somarOnStartContador();
+        // manter =  getIntent().getExtras().getParcelable("_manter");
 
-        texto = "onStart";
-        editTextTela2.setText(texto.concat("(" + m.getSomarOnStartContador()) + "),");
+        editTextTela2.setText( manter.getTexto() );
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
-
-        texto = "onResume";
-        editTextTela2.setText(texto.concat("(" + m.getAddOnResumeContador()) + "),");    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        Manter m =  getIntent().getExtras().getParcelable("_manter");
-
-        texto = "onPause";
-        editTextTela2.setText(texto.concat("(" + m.getSubOnPauseContador()) + "),");
-
-    }
-
 
     public void tela1Voltar_OnClick(View view){
 
-        Manter manter = new Manter(texto, contador);
-        Intent it = new Intent(this, Tela2Activity.class);
-        it.putExtra("_manter", manter);
+        Intent it = new Intent(this, MainActivity.class);
+        //it.putExtra("_manter", manter);
         startActivity(it);
     }
 

@@ -7,18 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
-
 public class MainActivity extends AppCompatActivity {
 
-    Manter manter;;   // Compartilhar entre os objetos
+    private Manter manter;   // Compartilhar entre os objetos
 
-    private String texto;
-    private int contador;
-
-    //String texto;   //
     private EditText editTextTela1;
     private Button buttonTela1Encerrar;
     private Button buttonIrTela2;
@@ -29,19 +21,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        manter = new Manter();
+        manter.setQuem("Main");
+
         editTextTela1 = (EditText) findViewById(R.id.editTextTela1);
         buttonTela1Encerrar = (Button) findViewById(R.id.buttonTela1Encerrar);
         buttonIrTela2 = (Button) findViewById(R.id.buttonIrTela2);
 
-        texto = "onCreate";
-        contador = contador + 0;
-        editTextTela1.setText(texto.concat("(" + String.valueOf(contador)) + "),");
+        editTextTela1.setText(manter.getTexto());
 
     }
 
+
+    /*
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Manter m =  getIntent().getExtras().getParcelable("_manter");
+
+        texto = "onResume";
+        editTextTela1.setText(texto.concat("(" + m.getAddOnResumeContador()) + "),");    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Manter m =  getIntent().getExtras().getParcelable("_manter");
+
+        texto = "onPause";
+        editTextTela1.setText(texto.concat("(" + m.getSubOnPauseContador()) + "),");
+
+    }
+
+   */
+
     public void tela2_OnClick(View view){
 
-        Manter manter = new Manter(texto, contador);
         Intent it = new Intent(this, Tela2Activity.class);
         it.putExtra("_manter", manter);
         startActivity(it);

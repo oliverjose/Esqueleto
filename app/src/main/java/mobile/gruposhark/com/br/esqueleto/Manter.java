@@ -19,12 +19,24 @@ public class Manter implements Parcelable {
 
     private String texto;
     private int contador;
+    private String quem;
 
-
-    public Manter(String texto, int contador) {
-        this.texto = texto;
-        this.contador = contador;
+    public Manter()
+    {
+        contador = 0;
+        texto =  "";
     }
+
+    public void setQuem(String _quem)
+    {
+        quem = _quem;
+        //concatenar();
+
+    }
+    //public Manter(String texto, int contador) {
+    //    this.texto = texto;
+    //    this.contador = contador;
+    //}
 
     private Manter(Parcel from){
         texto = from.readString();
@@ -49,17 +61,13 @@ public class Manter implements Parcelable {
         return texto;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
+    // public void setTexto(String texto) {
+    //;;    this.texto = texto;
+    //}
 
-    public int getContador() {
-        return contador;
-    }
-
-    public void setContador(int _contador) {
-        this.contador = _contador;
-    }
+    //public int getContador() {
+    //    return contador;
+    //}
 
     @Override
     public int describeContents() {
@@ -72,18 +80,26 @@ public class Manter implements Parcelable {
         dest.writeInt(contador);
     }
 
-    public int getSomarOnStartContador() {
+    public void somarOnStartContador() {
         contador += 1000;
-        return contador;
+        concatenar();
+        return;
     }
 
-    public int getAddOnResumeContador() {
+    public void somarOnResumeContador() {
         contador += 1;
-        return contador;
+        concatenar();
+        return;
     }
 
-    public int getSubOnPauseContador() {
+    public void subtrairOnPauseContador() {
         contador -= 100;
-        return contador;
+        concatenar();
+        return;
+    }
+
+    private void concatenar()
+    {
+        texto += texto.concat("Quem(" + quem  + "), Contador[" + contador + "], ");
     }
 }

@@ -20,11 +20,16 @@ public class Manter implements Parcelable {
     private String texto;
     private int contador;
     private String quem;
+    private String tela;
 
     public Manter()
     {
         contador = 0;
         texto =  "";
+    }
+
+    public void setTela(String _tela){
+        tela = _tela;
     }
 
     public void setQuem(String _quem)
@@ -58,6 +63,7 @@ public class Manter implements Parcelable {
     };
 
     public String getTexto() {
+
         return texto;
     }
 
@@ -71,6 +77,7 @@ public class Manter implements Parcelable {
 
     @Override
     public int describeContents() {
+
         return 0;
     }
 
@@ -78,6 +85,12 @@ public class Manter implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(texto);
         dest.writeInt(contador);
+    }
+
+    public void addOnCreateContador(){
+        contador = 0;
+        concatenar();
+        return;
     }
 
     public void somarOnStartContador() {
@@ -106,6 +119,7 @@ public class Manter implements Parcelable {
 
     private void concatenar()
     {
-        texto += texto.concat("Quem(" + quem  + "), Contador[" + contador + "], ");
+        // texto = texto.concat("Tela("+ tela + "), Método(" + quem  + "), Contador[" + contador + "] | ");
+        texto += "Tela("+ tela + "), Método(" + quem  + "), Contador[" + contador + "] | ";
     }
 }
